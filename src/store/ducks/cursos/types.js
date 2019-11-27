@@ -1,0 +1,3 @@
+export const CARREGAR_CURSOS = "CARREGAR_CURSOS";
+export const EDIT_CURSO = "EDIT_CURSO";
+export const ADICIONAR_CURSO = "ADICIONAR_CURSO";

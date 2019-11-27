@@ -1,15 +1,29 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-const Cursos = () => {
-    const cursos = useSelector(state => state.cursos);
-    return (
-        <ul>
-            <li>#1</li>
-            <li>#2</li>
-            {cursos.map((curso, key) => <li key={key}>{curso}</li>)}
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { carregar, adicionar, edit } from "../../store/ducks/cursos";
+import List from "../list";
 
-        </ul>
-    );
+export default () => {
+  const dispatch = useDispatch();
+  const cursos = useSelector(state => state.cursoReducer.cursos);
+  const curso = useSelector(state => state.cursoReducer.curso);
+  if (cursos.length == 0) {
+    dispatch(carregar());
+  }
+  const salvar = event => {
+    event.preventDefault();
+    dispatch(adicionar(curso));
+    dispatch(edit(""));
+  };
+  return (
+    <>
+      <List data={cursos} />
+      <input
+        type="text"
+        value={curso}
+        onChange={e => dispatch(edit(e.target.value))}
+      />
+      <button onClick={e => salvar(e)}>salvar</button>
+    </>
+  );
 };
-
-export default Cursos;

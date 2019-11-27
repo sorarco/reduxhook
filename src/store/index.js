@@ -1,19 +1,5 @@
-import { createStore } from "redux";
+import { createStore, combineReducers } from "redux";
 
-const INITAL_STATE = {
-    cursos: [
-        'React com redux',
-        'React com redux+hooks'
-    ]
-}
+import { cursoReducer } from "./ducks/cursos";
 
-const appReducer = (state = INITAL_STATE, action) => {
-    switch (action.type) {
-        case 'CARREGAR_CURSOS':
-            return { ...state, cursos: action.payload }
-        default:
-            return state;
-    }
-}
-
-export default createStore(appReducer);
+export default createStore(combineReducers({ cursoReducer }));
