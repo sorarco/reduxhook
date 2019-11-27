@@ -19,7 +19,7 @@ export default () => {
   useEffect(() => {
     dispatch(carregar());
     dispatch(carregarSeguidores());
-  }, []);
+  }, [dispatch]);
 
   const salvar = event => {
     event.preventDefault();

@@ -1,8 +1,15 @@
-import { createStore, combineReducers, applyMiddleware } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import { connectRouter, routerMiddleware } from "connected-react-router";
 import thunk from "redux-thunk";
-import { cursoReducer } from "./ducks/cursos";
-import { gitHubReducer } from "./ducks/github";
 
-const middlewares = [thunk];
+import history from "../routes/history";
+import reducers from "../reducers";
 
-export default createStore(combineReducers({ cursoReducer, gitHubReducer }), applyMiddleware(...middlewares));
+const middlewares = [routerMiddleware(history), thunk];
+
+const store = createStore(
+    connectRouter(history)(reducers),
+    applyMiddleware(...middlewares)
+);
+
+export default store;
